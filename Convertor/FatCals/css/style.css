@@ -1,0 +1,268 @@
+body {
+    font-family: Avenir;
+    font-size: 18px;
+  }
+ 
+header {
+    background-image: url("../images/header1.jpg"); /* Set backgroung image in header */
+    padding: 60px; /* Padding for the header */
+    color: white; /* Set the text color */
+    text-align: left; /* set the text alignment to right */    
+}
+
+.calculator{
+  margin-top: 50px;
+}
+
+th{
+  padding-right: 15px;
+}
+
+.calresult{
+  margin-top: 40px;
+  visibility: hidden;
+
+}
+.fatresult{
+  margin-top: 5px;
+  visibility: hidden;
+}
+
+.results{
+  visibility: hidden;
+}
+
+.buttonRow{
+margin-top: 30px;
+
+}
+input{
+  border: none;
+  border-bottom-color: #C8CCD4;
+  border-radius: 3em;
+  text-align: end;
+}
+
+.label-ConsiderLowFat {
+  user-select: none;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.label-ConsiderLowFat input:checked + .checkbox {
+  border-color: #6f42c1;
+}
+
+.label-ConsiderLowFat input:checked + .checkbox svg path {
+  fill: #6f42c1;
+}
+
+.label-ConsiderLowFat input:checked + .checkbox svg polyline {
+  stroke-dashoffset: 0;
+}
+
+.label-ConsiderLowFat:hover .checkbox svg path {
+  stroke-dashoffset: 0;
+}
+
+.label-ConsiderLowFat .checkbox {
+  position: relative;
+  top: 2px;
+  float: left;
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #C8CCD4;
+  border-radius: 3px;
+}
+
+.label-ConsiderLowFat .checkbox svg {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+}
+
+.label-ConsiderLowFat .checkbox svg path {
+  fill: none;
+  stroke: #673AB7;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 71px;
+  stroke-dashoffset: 71px;
+  transition: all 0.6s ease;
+}
+
+.label-ConsiderLowFat .checkbox svg polyline {
+  fill: none;
+  stroke: #FFF;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 18px;
+  stroke-dashoffset: 18px;
+  transition: all 0.3s ease;
+}
+
+.label-ConsiderLowFat > span {
+  pointer-events: none;
+  vertical-align: middle;
+}
+  
+.invisible {
+  position: absolute;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.field{
+  --uiFieldPlaceholderColor: var(--fieldPlaceholderColor, #767676);
+}
+
+.field__input{ 
+	background-color: transparent;
+	border-radius: 0;
+  border: none;
+  width: 10px;
+  -webkit-appearance: none;
+  appearance: none;
+	-moz-appearance: none;
+	font-family: inherit;
+	font-size: 1em;
+}
+
+.field__input:focus::-webkit-input-placeholder{
+	color: var(--uiFieldPlaceholderColor);
+}
+
+.field__input:focus::-moz-placeholder{
+	color: var(--uiFieldPlaceholderColor);
+	opacity: 1;
+}
+
+.field{
+  display: inline-block;
+}
+
+.field__input{ 
+	display: block;
+	box-sizing: border-box;
+	width: 60%;
+}
+
+/* field_animated */
+
+.field_animated{
+  --uiFieldHeight: var(--fieldHeight, 40px);  
+  --uiFieldBorderWidth: var(--fieldBorderWidth, 2px);
+  --uiFieldBorderColor: var(--fieldBorderColor);
+  --uiFieldFontSize: var(--fieldFontSize, 1em);
+  --uiFieldHintFontSize: var(--fieldHintFontSize, 1em);
+  --uiFieldPaddingRight: var(--fieldPaddingRight, 15px);
+  --uiFieldPaddingBottom: var(--fieldPaddingBottom, 15px);
+  --uiFieldPaddingLeft: var(--fieldPaddingLeft, 15px);    
+	position: relative;
+	box-sizing: border-box;
+  font-size: var(--uiFieldFontSize);
+	padding-top: 1em;  
+}
+
+.field_animated .field__input{
+  height: var(--uiFieldHeight);
+  padding: 0 var(--uiFieldPaddingRight) 0 var(--uiFieldPaddingLeft);
+  border-bottom: var(--uiFieldBorderWidth) solid var(--uiFieldBorderColor);  
+}
+
+.field_animated .field__input::-webkit-input-placeholder{
+	opacity: 0;
+	transition: opacity .2s ease-out;
+}
+
+.field_animated .field__input::-moz-placeholder{
+	opacity: 0;
+	transition: opacity .2s ease-out;
+}
+
+.field_animated .field__input:focus{
+	outline: none;
+}
+
+.field_animated .field__input:not(:placeholder-shown) ~ .field__label-wrap .field__label{
+	opacity: 0;
+	bottom: var(--uiFieldPaddingBottom);
+}
+
+.field_animated .field__input:focus::-webkit-input-placeholder{
+	opacity: 1;
+	transition-delay: .2s;
+}
+
+.field_animated .field__input:focus::-moz-placeholder{
+	opacity: 1;
+	transition-delay: .2s;
+}
+
+.field_animated .field__label-wrap{
+	box-sizing: border-box;
+	width: 60%;
+	height: var(--uiFieldHeight);	
+	pointer-events: none;
+	cursor: text;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.field_animated .field__label{
+	position: absolute;
+	left: var(--uiFieldPaddingLeft);
+  bottom: var(--uiFieldPaddingBottom);
+  line-height: 1;
+  font-size: var(--uiFieldHintFontSize);
+	pointer-events: none;
+	transition: bottom .2s cubic-bezier(0.9,-0.15, 0.1, 1.15), opacity .2s ease-out;
+	will-change: bottom, opacity;
+}
+
+.field_animated .field__input:focus ~ .field__label-wrap .field__label{
+	opacity: 1;
+  bottom: var(--uiFieldHeight);
+}
+
+/* field_a2 */
+
+.field_a2 .field__label-wrap:after{
+	content: "";
+  box-sizing: border-box;
+  width: 0;
+	height: var(--uiFieldBorderWidth);
+  background-color: var(--fieldBorderColorActive);
+  
+	position: absolute;
+	bottom: 0;
+	left: 0;  
+  
+	will-change: width;
+	transition: width .285s ease-out;
+}
+
+.field_a2 .field__input:focus ~ .field__label-wrap:after{
+	width: 100%;
+}
+
+.field{
+  --fieldBorderColor: #D1C4E9;
+  --fieldBorderColorActive: #673AB7;
+}
+
+h1{
+  margin-top: 30px;
+  margin-left: 28%;
+}
+
+.ButtonRow{
+margin-top: 3%;
+  margin-left: 35%;  
+}

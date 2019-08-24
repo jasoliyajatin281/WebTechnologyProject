@@ -1,0 +1,31 @@
+body, html {
+	height: 100%;
+}
+
+.bg {
+	background-image: url("../images/foro-romano.jpg");
+	height: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.inputBox {
+	margin-top: 2em;
+	margin-bottom: 2em;
+	padding: 1em;
+	width: 500px;
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+
+#numeralBox {
+	background-color: rgba(58, 58, 58, 0.8);
+	width: 500px;
+}
+#romanNumeral {
+	color: #eeb280;
+	font-size: 8em;
+	font-weight: bold;
+	font-family: "Times New Roman", serif;
+}

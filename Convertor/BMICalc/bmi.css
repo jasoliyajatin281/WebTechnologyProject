@@ -1,0 +1,40 @@
+#gradient {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  background: #836997;
+}
+.navbar-height {
+  height:70px; 
+  opacity:0.7;
+}
+
+.extra-height-bottom {
+  height:200px; 
+}
+.inner-background {
+  opacity:0.9; 
+  background-color: hsla(0,0%,96%,0.48);
+}
+
+.nextSection {
+  height: 700px;
+  margin-left:280px;
+  margin-right:280px;
+}
+.zip-container {
+  width: 960px;
+}
+.show-initial {
+  opacity:0;
+  transition:opacity 1s linear;
+}
+
+.show-active {
+  opacity: 1;
+}
+
+.show-active-transparent {
+  opacity: 0.7;
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="images/logo.png" />
+	<title>Apollo Hospitals</title>
+	<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+	<link href='https://fonts.googleapis.com/css?family=Alegreya+Sans' rel='stylesheet'>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2">
+				<!-- Card -->
+				<div class="card" id="start">
+				    <!-- Card body -->
+				    <div class="card-body">
+				    	<img src="images/logo.png" height="60px;" width="90px;">
+				    	<p class="h4 text-center">APOLLO HOSPITALS</p>
+				    	<p class="h6 text-center"><small>154/11, Bannerghatta Main Road, IIM Opposite, Bengaluru, Karnataka 560076, India</small></p>
+						<p class="h6 text-center"><small>Reception No: 079-25714040</small></p>
+						<hr>
+				        <p class="h5 text-center mb-4">Billing Details</p>
+						<div id="message"></div>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label for="patient_name" class="bmd-label-floating">Patient Name</label>
+									<input type="text" id="patient_name" class="form-control" name="patient_name">
+									<div id="error_patient_name"></div>
+								</div>
+								<div class="form-group">
+									<label for="doctor_name" class="bmd-label-floating">Doctor Name</label>
+									<input type="text" id="doctor_name" name="doctor_name" class="form-control">
+									<div id="error_doctor_name"></div>
+								</div>
+								<div class="form-group">
+									<label for="in_hospital" class="bmd-label-floating">Days in Hospital</label>
+									<input type="number" id="in_hospital" class="form-control" name="in_hospital">
+									<div id="error_inhospital"></div>
+								</div>
+								<div class="form-group">
+									<label for="medication_charge" class="bmd-label-floating">Medication Charges in $</label>
+									<input type="text" id="medication_charge" class="form-control" name="medication_charge">
+									<div id="error_medication"></div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label for="surgical_charge" class="bmd-label-floating">Surgical Charges in $</label>
+									<input type="text" id="surgical_charge" class="form-control"  name="surgical_charge">
+									<div id="error_surgical"></div>
+								</div>
+								<div class="form-group">
+									<label for="lab_charge" class="bmd-label-floating">Lab Fees in $</label>
+									<input type="text" id="lab_charge" class="form-control"  name="lab_charge">
+									<div id="error_lab"></div>
+								</div>
+								<div class="form-group">
+									<label for="physical_charge" class="bmd-label-floating">Physical Rehabilitation Charges in $</label>
+									<input type="text" id="physical_charge" class="form-control"  name="physical_charge">
+									<div id="error_physical"></div>
+								</div>
+							</div>
+						</div>
+				        <div class="text-center">
+				            <button class="btn btn-primary" onclick="receipt();">Submit</button>
+				        </div>
+				    </div>
+				    <!-- Card body -->
+				</div>
+				<!-- Card -->
+				<div>
+					<div id = "receipt">
+						<div class="card">
+				    		<!-- Card body -->
+				    		<div class="card-body">
+				    			<div class="col-lg-12">
+				    				<img src="images/logo.png" height="60px;" width="90px;">
+				    				<p class="h4 text-center">APOLLO HOSPITALS</p>
+				    				<p class="h6 text-center"><small>154/11, Bannerghatta Main Road, IIM Opposite, Bengaluru, Karnataka 560076, India</small></p>
+									<p class="h6 text-center"><small>Reception No: 079-25714040</small></p>
+									<hr>
+						    		<div class="row">
+						    			<div class="col-lg-6">
+						    				<h6>Patient Name: <small id="pname"></small></h6>
+						    			</div>
+						    			<div class="col-lg-5 offset-lg-1">
+						    				<h6>Doctor Name: <small id="dname"></small></h6>
+						    			</div>
+						    		</div>
+			    					<table class="table table-condensed">
+    									<thead>
+			                                <tr>
+			        							<td><strong>Services and Stay</strong></td>
+			        							<td class="text-center"><strong>Charge Per Day</strong></td>
+			        							<td class="text-right"><strong>Total</strong></td>
+			                                </tr>
+		    							</thead>
+		    							<tbody>
+    										<tr>
+			    								<td>Stay Charges</td>
+			    								<td class="text-center">$350.00</td>
+			    								<td class="text-right" id="stay_amount"></td>
+    										</tr>
+			                                <tr>
+			        							<td>Miscellaneous Charges</td>
+			    								<td class="text-center"></td>
+			    								<td class="text-right" id="misc_amount"></td>
+			    							</tr>
+			                                <tr>
+			    								<td></td>
+			    								<td class="text-center"><strong>Total Amount</strong></td>
+			    								<td class="text-right" id="total_amount"></td>
+			    							</tr>
+			    							<tr>
+			    								<td></td>
+			    								<td></td>
+			    								<td class="text-right">Authorizer Sign <br><img src="images/sign.png" height="30; width:25px;"><br>Paul Ryan</td>
+			    							</tr>
+				    					</tbody>
+				    				</table>
+				    				<button type="button"  onclick="refresh()" class="btn btn-danger">Create New</button>
+				     			</div>
+				    		</div>
+				    	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+	<script src="js/script.js"></script>
+	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+</body>
+</html>

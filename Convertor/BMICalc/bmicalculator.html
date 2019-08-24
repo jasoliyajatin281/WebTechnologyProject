@@ -1,0 +1,134 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <!-- Custom CSS part -->
+    <link rel="stylesheet" href="bmi.css" />
+    <title>
+        BMI Calculator
+    </title>
+</head>
+
+<body>
+    <div id="gradient">
+        <nav id="nav" class="navbar navbar-expand-sm bg-light navbar-light fixed-top navbar-height">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link font-navbar" href="#whatis">WHAT IS BMI</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-navbar" href="#calculator">BMI CALCULATOR</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- placement -->
+        <div id="whatis" class="container-fluid navbar-height"></div>
+        <!-- WHAT IS BMI section -->
+        <div class="container p-5 mt-5 inner-background">
+            <div id="whatis-content" class="row justify-content-md-left show-initial">
+                <h5>Body mass index (BMI) is a formula that uses weight and height to estimate body fat. Excess body fat is related
+                    to serious health conditions. For most people, BMI provides a reasonable estimate of body fat. The BMI's
+                    biggest weakness is that it doesn't consider individual factors, such as bone or muscle mass.
+                </h5>
+                <h5> BMI may:</h5>
+                <div>
+                    <br />
+                    <ul>
+                        <li>
+                            <h5>Underestimate body fat for older adults or other people with low muscle mass.</h5>
+                        </li>
+                        <li>
+                            <h5>Overestimate body fat for people who are very muscular and physically fit.</h5>
+                        </li>
+                        <li>
+                            <h5>Inadequately evaluate health risks for people with excess abdominal fat.</h5>
+                        </li>
+                    </ul>
+                </div>
+                <h5>In addition, people of Asian descent may have an increased risk of health problems at a lower BMI threshold
+                    than the general population. Asians with a BMI of 23 or higher may be at risk. Talk with your doctor
+                    if you have questions about your BMI.</h5>
+
+            </div>
+        </div>
+        <!-- BMI calculator -->
+        <div class="container-fluid extra-height-bottom"></div>
+        <!-- placement -->
+        <div id="calculator" class="container-fluid navbar-height"></div>
+        <div class="container zip-container">
+            <!-- header section: contains header of section -->
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col" style="top:50px; opacity:0.9;">
+                        <h3>BMI CALCULATOR</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- form section: contains input textboxes and calculate button -->
+            <div class="container form-group p-5 mt-5" style="opacity:0.9; background-color: hsla(0,0%,96%,0.48);">
+                <!-- row 1 contains unit types -->
+                <div class="row">
+                    <div class="col-sm-3 offset-3">
+                        <h5>Select value type:</h5>
+                    </div>
+                    <div class="col-sm-3">
+                        <select type="multiple" id="unittype" class="form-control form-control-sm" onclick="unitTypeChange();">
+                            <option value="0" selected="selected">Inches and pounds</option>
+                            <option value="1">Metres and kilograms</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- row 2 contains height inputs -->
+                <div class="row mt-4">
+                    <div class="col-sm-3 offset-3">
+                        <h5>Enter your height:</h5>
+                    </div>
+                    <div class="col-sm-3">
+                        <input class="form-control form-control-sm" id="height" type="text" onkeydown="clearAll();">
+                    </div>
+                    <div class="col-sm-3">
+                        <h5 id="heightunit">inches</h5>
+                    </div>
+                </div>
+                <!-- row 3 contains weight inputs -->
+                <div class="row mt-4">
+                    <div class="col-sm-3 offset-3">
+                        <h5>Enter your weight:</h5>
+                    </div>
+                    <div class="col-sm-3">
+                        <input class="form-control form-control-sm" id="weight" type="text" onkeydown="clearAll();">
+                    </div>
+                    <div class="col-sm-3 align-middle">
+                        <h5 id="weightunit">pounds</h5>
+                    </div>
+                </div>
+                <!-- row 4 contains button which use to call calculate function -->
+                <div class="row justify-content-md-center p-2 text-center mt-3">
+                    <div class="col-sm-3">
+                        <button class="btn btn-primary btn-md" onclick="computeBMI();">Calculate BMI</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid extra-height-bottom">
+            <!-- row 5 contains display alert tags which will be displayed at the end of calculation process -->
+            <div class="row justify-content-md-center p-2 text-center">
+                <div id="alert-div" class="col-xl-auto show-initial">
+                    <span class="alert alert-success alert-lg d-none" id="normal-bmi-output"></span>
+                    <span class="alert alert-warning alert-lg d-none" id="warning-bmi-output"></span>
+                    <span class="alert alert-danger alert-lg d-none" id="error-bmi-output"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- Bootstrap 4 Javascript includes -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+crossorigin="anonymous"></script>
+<script src="bmiscript.js"></script>
+
+</html>

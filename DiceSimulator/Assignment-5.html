@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dice Simulator</title>
+	<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+	<link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet'>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="gameStart();">
+	<video autoplay muted loop id="myVideo">
+	  <source src="images/videoplayback.mp4" type="video/mp4">
+	</video>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div id ="message"></div>
+				<div class="card">
+					<div class="card-header">
+					   <h2>Dice Simulator</h2>
+					</div>
+				  	<div class="card-body">
+				  		<div class="row">
+					  		<div class="col-lg-5 offset-lg-2" id="start">
+					  			<div class="form-group">
+								    <label for="name" class="bmd-label-floating">Player Name</label>
+								    <input type="text" id="name" class="form-control" placeholder="Enter player name">
+								    <label id="error"></label>
+								</div>
+					  			<img src="images/game.png" class="move" alt="Game Start"  id="image"  onclick="start();">
+					  		</div>
+					  	</div>
+					    <div id="game">
+					    	<h2 id="username"></h2>
+					    	<div class="row">
+					    		<div class="col-lg-3">
+									<div id="dice1"></div>
+								</div>
+								<div class="col-lg-3">
+									<div id="dice2"></div>
+								</div>
+								<div class="col-lg-3 pull-left">
+									<div id="result"></div>
+								</div>
+								<div class="col-lg-3 pull-left">
+									<div id="user_won"></div>
+									<div id="user_won_message"></div>
+								</div>
+							</div>
+				 			<button class="dice" onclick="rollDice();">Roll Dice</button>
+						</div>
+				  	</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="js/script.js"></script>
+</body>
+</html>

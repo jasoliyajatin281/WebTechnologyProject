@@ -1,0 +1,39 @@
+body, html {
+	height: 100%;
+}
+
+.bg {
+	background-image: url("../images/math-image.jpg");
+	height: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;	
+}
+
+.inputBox {
+	margin-top: 2em;
+	margin-bottom: 2em;
+	padding: 1em;
+	width: 500px;
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+.titleBox {	
+	width: 500px;
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+.titleBox h5 {
+	font-size: 3em;
+	font-variant: small-caps;
+}
+
+.unit-selector {
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+.label-format {
+	min-width: 90px;
+	text-align: right;
+}

@@ -1,0 +1,11 @@
+.card {
+    margin-top: 10px;
+    opacity: .8;
+}
+body{
+    font-family: 'Alegreya+Sans';
+	font-size: 22px;
+	background-image: url("../images/bimage.jpg");
+    background-color: #cccccc;
+}
+

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Define the encoding we are using for the page, so we can use special
+	characters like "é" or "ç" directly if necessary. -->
+	<meta charset="UTF-8">
+	<title>Tip, Tax and Total</title>
+	<!-- Import bootstrap -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+	<style type="text/css">
+		/** CSS Style Defines appearance of the "bill" on the page **/
+		#bill
+		{
+			background-color: #efefef;
+			font-family: "Courier New", Monospace;
+			font-size: 10pt;
+			text-align: center;
+			padding-top: 50px;
+			padding-bottom: 30px;
+			width: 220px;
+			/* a dotted border at the top and bottom
+			gives the appearance of ripped paper */
+			border: dotted 1.5px #999999;
+
+			/* we remove the border from left and right side */
+			border-left: none;
+			border-right: none;
+		}
+
+		/* Sets every div inside the bill to align text on the
+		left side... */
+		#bill div
+		{
+			text-align: left;
+		}
+
+		/* Except for the ones that hold money value. These we
+		Want on the right side. */
+		#bill div.money-value
+		{
+			text-align: right;
+		}
+
+		/* CSS code to set the background */
+		body
+		{
+			background-image: url('images/dining-background.jpg');
+
+			/* makes the image appear as large as the screen */
+			background-size: cover;
+			background-repeat: no-repeat;
+
+			/* mutes the color of the background, so it's less
+			distracting */
+			background-color: #775522;
+			background-blend-mode: lighten;
+		}
+	</style>
+</head>
+<body>
+	<div class="container-fluid" style="margin: 0.5em;">
+		
+		<!-- First Row: Input Box -->
+		<div class="row">
+			<div class="col">
+				<div class="container mx-auto p-sm-2 bg-info border border-info rounded" style="width: 400px">
+					<div class="row">
+						<p class="col-7 text-light" style="text-align: right">
+							Please enter your order total
+						</p>
+						<div class="col-5">
+							<input class="col" type="text"
+								onkeypress="return actOnKey(event, 13, fillBill);"
+								id="orderInput">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12" style="text-align: right">
+							<button class="btn btn-light" onclick="fillBill();">
+								Calculate
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Second Row: Error Box -->
+		<div class="row">
+			<div class="col">
+				<div class="container p-sm-2">
+					<div class="row">
+						<div class="col">
+							<div
+								class="mx-auto text-danger text-center bg-light border border-danger rounded"
+								style="width: 400px"
+								id="errorBox"></div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Third Row: The Bill -->
+		<div class="row">
+			<div class="col">
+				<div class="container mx-auto align-midle" style="width: 250px;">
+					<div id="bill" class="container">
+
+						<!-- this row defines a "header" on the bill. This is just for fun and
+						to make it seem more realistic. :) -->
+						<div class="row">
+							<div class="col-3">
+								<img src="images/logo.png" height="50">
+							</div>
+							<div class="col-9">
+								<!-- Google: Java -->
+								<strong>Java Coffee Inc.</strong><br>
+								1995 Gosling Rd<br>
+								Conestoga, ON
+							</div>
+						</div>
+
+						<!-- This row shows today's date -->
+						<div class="row">
+							<div class="col" style="text-align: center" id="dateBox">
+							</div>
+						</div>
+
+						<!--
+							Now the really important rows... From this point on, the
+							first column shows the label of the amount, while the
+							last column shows the calculated value for this part of
+							the bill.
+
+							"Order" should be the same value as the user input.
+							"Tip" should be the calculated value for the tip (15% of
+								order value).
+							"Tax" should be the calculated value for the tax (7% before
+								tips)
+							"Total" should be the total of the facture, i.e. the sum of
+								all the values above.
+						-->
+						<div class="row" style="margin-top: 30px">
+							<div class="col">Order</div>
+							<div id="order" class="col money-value"></div>
+						</div>
+						<div class="row">
+							<div class="col">Tip (<span id="tipInfo"></span>%)</div>
+							<div id="tip" class="col money-value"></div>
+						</div>
+						<div class="row">
+							<div class="col">Tax (<span id="taxInfo"></span>%)</div>
+							<div id="tax" class="col money-value"></div>
+						</div>
+						<!-- This row shows a divisor, just for a nicer look -->
+						<div class="row" style="text-align: left">
+							<div class="col">
+								<hr>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col"><strong>Total</strong></div>
+							<div id="total" class="col money-value"></div>
+						</div>
+
+						<!-- Bills usually have a greeting message :) -->
+						<div class="row">
+							<div class="col" style="padding-top: 10px; text-align: center">Thank You!</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- now for the javascript code -->
+	<script type="text/javascript">
+		////////////////////////////////////////////////////////////
+		//
+		// Constant definitions
+		//
+
+		// This constant defines how we want to show today's
+		// date and time on the bill
+		const dateFormat = {
+			hour: "numeric",
+			minute: "numeric",
+			year: "numeric",
+			month: "numeric",
+			day: "numeric",
+			hour12: false
+		};
+
+		// This constant defines how we want to show money
+		// values in the bill.
+		const format = {
+			style: 'currency',
+            currency: 'CAD',
+            minimumFractionDigits: 2 
+		};
+
+		// Percent value of the tip
+		const tipPercent = 15;
+		// Percent value of the tax
+		const taxPercent = 7;
+
+		////////////////////////////////////////////////////////////
+		//
+		// Variable definitions
+		//
+
+		// Define variables for each important element on the page
+		// By "important", I mean elements that this code should
+		// interact with
+		var tip = document.getElementById('tip');
+		var tipInfo = document.getElementById('tipInfo');
+		var tax = document.getElementById('tax');
+		var taxInfo = document.getElementById('taxInfo');
+		var total = document.getElementById('total');
+		var order = document.getElementById('order');
+		var orderInput = document.getElementById('orderInput');
+		var errorBox = document.getElementById('errorBox');
+		var dateBox = document.getElementById('dateBox');
+
+		// We use Javascript's NumberFormat object to format
+		// the money values in the correct way.
+		var money = new Intl.NumberFormat('en-CA', format);
+
+		////////////////////////////////////////////////////////////
+		//
+		// Function definitions
+		//
+
+		// Calculates the percent value of a predefined charge.
+		// Parameters:
+		//      charge - numeric, amount from which to take the
+		//               percentage.
+		//   pctAmount - numeric, percentage amount to take from
+		//               charge
+		// Returns: numeric representing the percentage value
+		function calculatePercentage(charge, pctAmount) {
+			return parseFloat(charge) * (pctAmount / 100);
+		}
+
+		// Displays an error message in the page.
+		// Parameters:
+		//     message - string, the message to be displayed
+		// Returns: void
+		function showError(message) {
+			errorBox.innerHTML = "Error: " + message;
+			errorBox.style.display = 'block';
+		}
+
+		// Hides the error box.
+		// Returns: void
+		function clearError() {
+			errorBox.style.display = 'none';
+		}
+
+		// Formats the ammount value as a currency as
+		// defined by the NumberFormat object.
+		// Parameters:
+		// 	  amount - numeric, value to format
+		// Returns: string with the formatted value
+		function formatCurrency(amount) {
+			return money.format(amount);
+		}
+
+		// Updates the page by reading the input and updating
+		// the respective fields in the Bill.
+		// returns: void
+		function fillBill() {
+			let orderAmount = 0;
+
+			// Get input from the user in numeric format
+			if (orderInput.value.trim().length > 0) {
+				orderAmount = parseFloat(orderInput.value);
+			}
+
+			// Clear the Error Box
+			clearError();
+
+			// Update the date in the bill
+			dateBox.innerHTML = Intl.DateTimeFormat('en-CA', dateFormat).format(new Date());
+
+			// Check if it's a valid input and show the appropriate
+			// error message if it is not.
+			if (isNaN(orderAmount)) {
+				showError("Invalid amount, please enter a number.");
+				return;
+			} else if (orderAmount < 0) {
+				showError("Invalid amount, please enter a positive number.");
+				return;
+			}
+			
+			// Calculate the values for tip, tax and total.
+			let tipAmount = calculatePercentage(orderAmount, tipPercent);
+			let taxAmount = calculatePercentage(orderAmount, taxPercent);
+			let totalAmount = orderAmount + tipAmount + taxAmount;
+
+			// Update the fields on the bill with the correct format
+			order.innerHTML = formatCurrency(orderAmount);
+			tip.innerHTML = formatCurrency(tipAmount);
+			tipInfo.innerHTML = tipPercent;
+			tax.innerHTML = formatCurrency(taxAmount);
+			taxInfo.innerHTML = taxPercent;
+			total.innerHTML = formatCurrency(totalAmount);
+		}
+
+		// Triggers the function "func" if the "event" contains the "key"
+		// parameters:
+		// 	  event - object, object with details about the event
+		//      key - key on which we want to trigger the function
+		//	   func - function we want to execute on that key
+		// returns: false if the event was triggered, true otherwise
+		function actOnKey(event, key, func) {
+			if (event.keyCode == key) {
+				func();
+				return false;
+			}
+			return true;
+		}
+
+		// Calling the function here will fill the bill
+		// with zeroes when the page is first loaded
+		fillBill();
+	</script>
+</body>
+</html>

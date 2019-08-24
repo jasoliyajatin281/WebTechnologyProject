@@ -1,0 +1,257 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <title>
+        Mass To Newtons Converter
+    </title>
+    <!-- CSS part -->
+    <style>
+        width-50 {
+            width: 50%;
+        }
+
+        font-navbar {
+            font-family: Baskerville, 'Palatino Linotype', Palatino, 'Century Schoolbook L', 'Times New Roman', serif;
+            font-size: 20px;
+        }
+
+        newton-section-background {
+            height: 800px;
+            background-image: url(Parallax-Background-Light-1_1-01.jpg);
+        }
+
+        bmi-section-background {
+            height: 800px;
+            background-image: url(running-wallpaper-desktop-background-For-Desktop-Wallpaper.jpg);
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <!-- Bootstrap navigation bar configuration -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" style="height:70px; opacity:0.7">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link font-navbar" href="#newton-section">MASS TO NEWTON CONVERTER</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link font-navbar" href="#bmi-section">BMI CALCULATOR</a>
+            </li>
+        </ul>
+    </nav>
+    <div id="newton-section" class="container-fluild bg-success" style="height: 800px; background-image:url(Parallax-Background-Light-1_1-01.jpg)">
+        <!-- header section: contains header of section -->
+        <div class="container p-5">
+            <div class="row justify-content-center text-center mt-5">
+                <div class="col" style="top:50px;">
+                    <h1>MASS TO NEWTON CONVERTER</h1>
+                </div>
+            </div>
+        </div>
+        <!-- form section: contains input textbox and convert button -->
+        <div class="container form-group p-5">
+            <!-- row 1 contains header -->
+            <div class="row justify-content-md-center">
+                <div class="col col-md-2">&nbsp;</div>
+                <div class="col-md-auto" style="top:50px;">
+                    <h2>Enter Mass of the Object</h1>
+                </div>
+                <div class="col col-md-2">&nbsp;</div>
+            </div>
+            <!-- row 2 contains input textbox -->
+            <div class="row justify-content-center text-center p-2">
+                <div class="col col-md-2">&nbsp;</div>
+                <div class="col col-md-4" style="top:55px;">
+                    <input class="form-control form-control-lg" id="massInput" type="text" onkeypress="clearAll()">
+                </div>
+                <div class="col col-md-2">&nbsp;</div>
+            </div>
+            <!-- row 3 contains button which use to call convert function -->
+            <div class="row justify-content-center p-2 text-center">
+                <div class="col-lg-2">&nbsp;</div>
+                <div class="col-lg-4" style="top:55px;">
+                    <button class="btn btn-primary btn-lg" onclick="calculateNewton();">CONVERT</button>
+                </div>
+                <div class="col-lg-2">&nbsp;</div>
+            </div>
+            <!-- row 4 contains display alert tags which will be displayed at the end of calculation process -->
+            <div class="row justify-content-center p-3 text-center">
+                <div class="col-md-auto" style="top:55px;">
+                    <span class="alert alert-success alert-lg d-none" id="success-output"></span>
+                    <span class="alert alert-warning alert-lg d-none" id="warning-output"></span>
+                    <span class="alert alert-danger alert-lg d-none" id="error-output"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="bmi-section" class="container-fluild" style="height: 800px; background-image:url(running-wallpaper-desktop-background-For-Desktop-Wallpaper.jpg)">
+        <!-- header section: contains header of section -->
+        <div class="container p-5">
+            <div class="row justify-content-center text-center">
+                <div class="col" style="top:50px;">
+                    <h1>BMI CALCULATOR</h1>
+                </div>
+            </div>
+        </div>
+        <!-- form section: contains input textboxes and calculate button -->
+        <div class="container form-group p-4 mt-1">
+            <!-- row 1 contains height inputs -->
+            <div class="row justify-content-md-left">
+                <div class="col-md-4">
+                    <h2>Enter your height:</h1>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control form-control-lg" id="height" type="text" onkeypress="clearAll()">
+                </div>
+                <div class="col-md-4">
+                    <select type="multiple" id="heightunits" class="form-control form-control-lg">
+                        <option value="metres" selected="selected">metres</option>
+                        <option value="inches">inches</option>
+                    </select>
+                </div>
+            </div>
+            <!-- row 2 contains weight inputs -->
+            <div class="row justify-content-md-left mt-5">
+                <div class="col-md-4">
+                    <h2>Enter your weight:</h1>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control form-control-lg" id="weight" type="text" onkeypress="clearAll()">
+                </div>
+                <div class="col-md-4">
+                    <select type="multiple" id="weightunits" class="form-control form-control-lg">
+                        <option value="kg" selected="selected">kilograms</option>
+                        <option value="lb">pounds</option>
+                    </select>
+                </div>
+            </div>
+            <!-- row 3 contains button which use to call calculate function -->
+            <div class="row justify-content-md-left p-2 text-left mt-3">
+                <div class="col-lg-4">
+                    <button class="btn btn-primary btn-lg" onclick="computeBMI();">Calculate BMI</button>
+                </div>
+            </div>
+            <!-- row 4 contains display alert tags which will be displayed at the end of calculation process -->
+            <div class="row justify-content-md-center p-2 text-center">
+                <div class="col-md-auto">
+                    <span class="alert alert-success alert-lg d-none" id="normal-bmi-output"></span>
+                    <span class="alert alert-warning alert-lg d-none" id="warning-bmi-output"></span>
+                    <span class="alert alert-danger alert-lg d-none" id="error-bmi-output"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // gravity constant
+    const GRAVITY_F = 9.8;
+    // BMI constants
+    const HEIGHT_CONSTANT = 39.3700787;
+    const WEIGHT_CONSTANT = 2.20462;
+    const errorString = "<strong>Error, </strong>please input number."
+    // constants contain classes which use to set to approriate tag to display
+    const SUCCESS_CLASS = "alert alert-success alert-lg";
+    const WARNING_CLASS = "alert alert-warning alert-lg";
+    const ERROR_CLASS = "alert alert-danger alert-lg";
+    // global variable controls show/hide of display spans in Newton converter section
+    var cleared = false;
+    // function calculate Newtons from mass
+    function calculateNewton() {
+        clearAll(true);
+        var inputValue = document.getElementById("massInput").value;
+        if (inputValue === "") { // if nothing is typed so error
+            document.getElementById("error-output").setAttribute("class", ERROR_CLASS + " d-block");
+            document.getElementById("error-output").innerHTML = errorString;
+        } else { // has value inputted
+            var inputNumber = parseInt(inputValue);
+            if (!isNaN(inputNumber)) { // if it is number so calculate Newtons
+                var weight = inputValue * GRAVITY_F;
+                var resultString = "weight of object is  <strong>" + weight + " N</strong>.";
+                if (weight >= 1000) { // object is too heavy, warning
+                    document.getElementById("warning-output").setAttribute("class", WARNING_CLASS + " d-block");
+                    document.getElementById("warning-output").innerHTML = "<strong>Oops, object is too heavy</strong> with " + resultString;
+                }
+                else if (weight <= 10) { // object is too light, warning too
+                    document.getElementById("warning-output").setAttribute("class", WARNING_CLASS + " d-block");
+                    document.getElementById("warning-output").innerHTML = "<strong>Oops, object is too light</strong> with " + resultString;
+                }
+                else { // object is OK, print result of calculation
+                    document.getElementById("success-output").setAttribute("class", SUCCESS_CLASS + " d-block");
+                    document.getElementById("success-output").innerHTML = "<strong>Hooray, </strong>" + resultString;
+                }
+            } else { // user keyin non-number, show error.
+                document.getElementById("error-output").setAttribute("class", ERROR_CLASS + " d-block");
+                document.getElementById("error-output").innerHTML = errorString;
+            }
+            // set cleared variable to false so clearAll can work when text change.
+            cleared = false;
+        }
+
+    }
+    // this function hide all display alert tags
+    function clearAll(forced) {
+        // check and turn cleared flag so next time it does not need to setAttribute
+        if (cleared === false || forced) {  
+            document.getElementById("success-output").setAttribute("class", SUCCESS_CLASS + " d-none");
+            document.getElementById("warning-output").setAttribute("class", WARNING_CLASS + " d-none");
+            document.getElementById("error-output").setAttribute("class", ERROR_CLASS + " d-none");
+            cleared = true;
+        }
+    }
+
+    // this function calculates BMI index
+    function computeBMI() {
+        // clear all BMI displays
+        document.getElementById("normal-bmi-output").setAttribute("class", SUCCESS_CLASS + " d-none");
+        document.getElementById("warning-bmi-output").setAttribute("class", WARNING_CLASS + " d-none");
+        document.getElementById("error-bmi-output").setAttribute("class", ERROR_CLASS + " d-none");
+
+        // obtain user inputs
+        var height = Number(document.getElementById("height").value);
+        var heightunits = document.getElementById("heightunits").value;
+        var weight = Number(document.getElementById("weight").value);
+        var weightunits = document.getElementById("weightunits").value;
+
+        if (height === 0 || isNaN(height) || weight === 0 || isNaN(weight)) {
+            document.getElementById("error-bmi-output").setAttribute("class", ERROR_CLASS + " d-block");
+            document.getElementById("error-bmi-output").innerHTML = errorString;
+            return; // quit function since nothing can do next.
+        }
+
+        // Convert all units to standard metrics, in this case, meters and kilograms
+        if (heightunits == "inches") height = height / HEIGHT_CONSTANT;
+        if (weightunits == "lb") weight = weight / WEIGHT_CONSTANT;
+
+        // Perform calculation
+        var BMI = weight / Math.pow(height, 2);
+        BMI = Math.round(BMI * 100) / 100; // beautify result.
+
+        // Display result of calculation
+        var result = " Your BMI index are <strong>" + BMI + "</strong>.";
+        var warning = true;
+        if (BMI < 18.5)
+            result = "<strong>Underweight!!</strong>" + result + " C'mon, McDonald is near by then.";
+        else if (BMI >= 18.5 && BMI <= 25) {
+            warning = false;
+            result = "<strong>Normal!</strong>" + result + " Good exercises!";
+        }
+        else if (BMI >= 25 && BMI <= 30)
+            result = "<strong>Obese!!</strong>." + result + " Oh it's still acceptable.";
+        else // BMI > 30
+            result = "<strong>Overweight!!!</strong>" + result + " Recreation center welcome you !!";
+        
+        // if we need to show warning so we show warning, otherwise we show success message.
+        if (warning) {
+            document.getElementById("warning-bmi-output").setAttribute("class", WARNING_CLASS + " d-block");
+            document.getElementById("warning-bmi-output").innerHTML = result;
+        } else {
+            document.getElementById("normal-bmi-output").setAttribute("class", SUCCESS_CLASS + " d-block");
+            document.getElementById("normal-bmi-output").innerHTML = result;
+        }
+    }
+</script>
+<!-- Bootstrap 4 Javascript includes -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</html>

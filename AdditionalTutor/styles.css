@@ -1,0 +1,113 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  color: black;
+}
+.bg-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: url("https://thumbs.dreamstime.com/b/blue-handmade-numbers-math-background-illustration-45589807.jpg") center center no-repeat;
+  background-size: cover;
+}
+.bg-img:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(to bottom right, #002f4b, #dc4225);
+  opacity: .6;
+}
+.card-posion{
+  position: absolute;
+  margin-top: 11em;
+}
+.wheel {
+  width: 25%;
+  float: left;
+  text-align: center;
+}
+.wheel .fa {
+  display: block;
+  font-size: 4em;
+  margin-bottom: 0.5em;
+}
+.material-icons {
+  font-size: 6em !important;
+}
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+.none{
+  color: none;
+}
+.alert{
+  margin-top: 5em;
+  font-size: 1.2em;
+}
+.flash {
+  -webkit-animation-name: blinker;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+    
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+@-moz-keyframes blinker {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+@-webkit-keyframes blinker {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+@keyframes blinker {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+section {
+  position: absolute;
+  overflow: hidden;
+}
+section.section-one {
+  height: 100vh;
+  z-index: 99;
+  width: 100%;
+}
+section.section-two {
+  background-image: linear-gradient(to left top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+  height: 2px;
+  padding: 0;
+  top: 50vh;
+  left: 50%;
+  width: 5px;
+  display: none;
+  border-top: 1px solid #3bb17c;
+  border-bottom: 1px solid #3bb17c;
+}
+.back-button{
+    position: absolute;
+    top: 4em;
+    left: 5em;
+}
+section { overflow-y: scroll; }

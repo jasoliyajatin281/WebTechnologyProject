@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Joe's Automotive</title>
+	<!--Icon in the corner of the page in browser-->
+	<link rel=icon href=img/favicon.png sizes="16x16" type="image/png">
+	<!--Boostrap StyleSheet-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+	 crossorigin="anonymous">
+	<!--Font from google font-->
+	<link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
+	<!--Our own StyleSheet. it is inside a folder called css-->
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<!-- the funtion inside onload is executed when the page load -->
+
+<body class="img-container" onload="load()">
+	<!-- Header -->
+	<header class="sticky-top header-class">
+		<p>Joe's Automotive</p>
+	</header>
+	<!--Container-->
+	<div class="container main-container">
+		<!--Client info-->
+		<div class="row" id="clientInfo">
+			<div class="col">
+				<div class="form-group">
+					<label for="clientName">Client's Name</label>
+					<input type="text" class="form-control" id="clientName">
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label for="clientId">Client's ID</label>
+					<input type="text" class="form-control" id="clientId">
+				</div>
+
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label for="clientePhone">Client's Phone</label>
+					<input type="tel" class="form-control" id="clientePhone">
+				</div>
+			</div>
+		</div>
+		<!--Add new service-->
+		<div class="row">
+			<div class="col-md-5" id="addServices">
+				<div class="form-group">
+					<label for="newServiceName">Service Name</label>
+					<input type="text" class="form-control" id="newServiceName">
+				</div>
+				<div class="form-group">
+					<label for="newServiceCost">Service Cost</label>
+					<input type="number" class="form-control" id="newServiceCost">
+				</div>
+				<button id="addNew" onclick="addNewService()" class="btn btn-primary">Add New Service</button>
+				<label for="error" class="error" id="errorAdd">Invalid Values</label>
+			</div>
+			<div class="col-md-6 offset-1" id="divServices">
+			</div>
+		</div>
+		<!--Values of Parts and Hours-->
+		<div class="row justify-content-center text-center" id="hourPart">
+			<label for="error" class="error" id="errorCalculate">Invalid Values</label>
+
+			<div class="col justify-content-centertext-center">
+				<div class="form-group row justify-content-center text-center">
+					<div class="col justify-content-center text-right">
+						<label for="parts">Parts</label>
+					</div>
+					<div class="col justify-content-center text-center">
+						<input type="number" class="form-control" id="parts">
+					</div>
+				</div>
+			</div>
+			<div class="col justify-content-center text-center">
+				<div class="form-group row justify-content-center text-center">
+					<div class="col justify-content-center text-right">
+						<label for="labor">Labor (Hr)</label>
+					</div>
+					<div class="col justify-content-center text-center">
+						<input type="number" class="form-control" id="labor">
+					</div>
+				</div>
+			</div>
+			<div class="col justify-content-center text-center">
+				<button id="addNew" onclick="calculate()" class="btn btn-primary">Calculate</button>
+				<button id="clear" onclick="clearAll()" class="btn btn-secondary">Clear</button>
+				<button id="pdf" class="btn btn-light" onclick="PDF1()">Invoice</button>
+			</div>
+		</div>
+		<!--Show totals-->
+		<div class=" justify-content-center text-center" id="divTotalBill">
+			<div class="row">
+				<div class="col" id="divTotal">
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!--Footer with information of our Group-->
+	<footer class="footer">
+		<div class="container center">
+			<div class="row justify-content-center">
+				<p>Joe's Automotive- June 2018</p>
+			</div>
+		</div>
+	</footer>
+
+</body>
+<!--from Bootstrap-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+ crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+ crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+ crossorigin="anonymous"></script>
+<!--JavaScript for Graphics source from www.highcharts.com-->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<!--PDF -->
+<script src="js/html2canvas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script>
+
+<!--Our own javaSript-->
+<script src="js/script.js"></script>
+
+</html>
